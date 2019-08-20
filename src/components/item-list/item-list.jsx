@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 
-// eslint-disable-next-line react/prefer-stateless-function
 export default class ItemList extends Component {
   swapiService = new SwapiService();
 
