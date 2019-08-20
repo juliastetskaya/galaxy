@@ -7,15 +7,16 @@ import PlanetView from './planet-view';
 export default class RandomPlanet extends Component {
   swapiService = new SwapiService();
 
-  constructor() {
-    super();
-    this.updatePlanet();
-  }
-
   state = {
     planet: {},
     loading: true,
     error: false,
+  }
+
+  componentDidMount() {
+    this.updatePlanet();
+    this.interval = setInterval(this.updatePlanet, 1000);
+    // clearInterval(this.interval);
   }
 
   onPlanetLoaded = (planet) => {
@@ -26,7 +27,7 @@ export default class RandomPlanet extends Component {
     this.setState({ error: true, loading: false });
   }
 
-  updatePlanet() {
+  updatePlanet = () => {
     const id = Math.floor(Math.random() * 16) + 2;
     this.swapiService
       .getPlanet(id)
