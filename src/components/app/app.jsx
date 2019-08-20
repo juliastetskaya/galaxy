@@ -6,7 +6,7 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 
 const App = () => (
-  <div>
+  <div className="container">
     <Header />
     <RandomPlanet />
     <div className="row mb2">
