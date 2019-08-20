@@ -7,7 +7,7 @@ export default class PersonDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: {},
+    person: null,
     loading: true,
   }
 
@@ -35,11 +35,8 @@ export default class PersonDetails extends Component {
   render() {
     const { person, loading } = this.state;
 
-    if (!person) {
-      return <span>Select a person from a list</span>;
-    }
-
-    const content = loading ? <Spinner /> : <PersonView person={person} />;
+    const data = loading ? <Spinner /> : <PersonView person={person} />;
+    const content = person ? data : <span className="title-no-person">Select a person from a list</span>;
 
     return (
       <div className="person-details card">
