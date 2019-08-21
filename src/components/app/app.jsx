@@ -15,7 +15,7 @@ export default class App extends Component {
   state = {
     showRandomPlanet: true,
     hasError: false,
-    selectedPerson: 1,
+    selectedPerson: null,
   }
 
   componentDidCatch() {
@@ -57,6 +57,17 @@ export default class App extends Component {
             <ItemList
               onPersonSelected={this.onPersonSelected}
               getData={this.swapiService.getAllPlanets}
+            />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={selectedPerson} loading={false} />
+          </div>
+        </div>
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList
+              onPersonSelected={this.onPersonSelected}
+              getData={this.swapiService.getAllStarships}
             />
           </div>
           <div className="col-md-6">
