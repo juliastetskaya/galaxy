@@ -26,7 +26,7 @@ export default class App extends Component {
     this.setState((state) => ({ showRandomPlanet: !state.showRandomPlanet }));
   };
 
-  onPersonSelected = (id) => {
+  onItemSelected = (id) => {
     this.setState({ selectedPerson: id });
   }
 
@@ -55,8 +55,9 @@ export default class App extends Component {
         <div className="row mb2">
           <div className="col-md-6">
             <ItemList
-              onPersonSelected={this.onPersonSelected}
+              onItemSelected={this.onItemSelected}
               getData={this.swapiService.getAllPlanets}
+              renderItem={({ name }) => name}
             />
           </div>
           <div className="col-md-6">
@@ -66,8 +67,9 @@ export default class App extends Component {
         <div className="row mb2">
           <div className="col-md-6">
             <ItemList
-              onPersonSelected={this.onPersonSelected}
+              onItemSelected={this.onItemSelected}
               getData={this.swapiService.getAllStarships}
+              renderItem={({ name }) => name}
             />
           </div>
           <div className="col-md-6">

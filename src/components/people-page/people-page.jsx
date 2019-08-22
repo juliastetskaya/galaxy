@@ -16,7 +16,7 @@ export default class PeoplePage extends Component {
     this.setState({ hasError: true });
   }
 
-  onPersonSelected = (id) => {
+  onItemSelected = (id) => {
     this.setState({ selectedPerson: id });
   }
 
@@ -30,8 +30,9 @@ export default class PeoplePage extends Component {
       <div className="row mb2">
         <div className="col-md-6">
           <ItemList
-            onPersonSelected={this.onPersonSelected}
+            onItemSelected={this.onItemSelected}
             getData={this.swapiService.getAllPeople}
+            renderItem={({ name, birthYear, gender }) => `${name} (${gender}, ${birthYear})`}
           />
         </div>
         <div className="col-md-6">

@@ -15,18 +15,23 @@ export default class ItemList extends Component {
 
   render() {
     const { itemList } = this.state;
-    const { onPersonSelected } = this.props;
+    const { onItemSelected, renderItem } = this.props;
 
-    const renderItemList = (people) => people.map(({ id, name }) => (
-      <li
-        key={id}
-        className="list-group-item"
-        role="presentation"
-        onClick={() => onPersonSelected(id)}
-      >
-        {name}
-      </li>
-    ));
+    const renderItemList = (people) => people.map((item) => {
+      const label = renderItem(item);
+      const { id } = item;
+
+      return (
+        <li
+          key={id}
+          className="list-group-item"
+          role="presentation"
+          onClick={() => onItemSelected(id)}
+        >
+          {label}
+        </li>
+      );
+    });
 
     const content = itemList ? renderItemList(itemList) : <Spinner />;
 
