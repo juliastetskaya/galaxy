@@ -1,5 +1,5 @@
 import React from 'react';
-import withData from '../hoc-helpers';
+import { withData } from '../hoc-helpers';
 import SwapiService from '../../services/swapi-service';
 
 const ItemList = ({ onItemSelected, renderLabel, data }) => {

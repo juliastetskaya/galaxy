@@ -1,3 +1,7 @@
 import withData from './with-data';
+import withDataDetails from './with-data-details';
 
-export default withData;
+export {
+  withData,
+  withDataDetails,
+};

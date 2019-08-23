@@ -1,59 +1,24 @@
-import React, { Component } from 'react';
-import SwapiService from '../../services/swapi-service';
+import React from 'react';
 import ItemView from './item-view';
-import Spinner from '../spinner';
+import SwapiService from '../../services/swapi-service';
+import { withDataDetails } from '../hoc-helpers';
 
-export default class PersonDetails extends Component {
-  swapiService = new SwapiService();
+const ItemDetails = ({ children, item, image }) => {
+  const data = (
+    <ItemView item={item} image={image}>
+      {children}
+    </ItemView>
+  );
 
-  state = {
-    item: null,
-    loading: true,
-    image: null,
-  }
+  const content = item ? data : <span className="title-no-person">Select a person from a list</span>;
 
-  componentDidMount() {
-    this.updateItem();
-  }
+  return (
+    <div className="person-details card">
+      {content}
+    </div>
+  );
+};
 
-  componentDidUpdate(prevProps) {
-    const { itemId } = this.props;
-    if (prevProps.itemId !== itemId) {
-      this.updateItem();
-    }
-  }
+const { getPerson } = new SwapiService();
 
-  updateItem() {
-    const { itemId, getData, getImageUrl } = this.props;
-    this.setState({ loading: true });
-
-    if (itemId) {
-      getData(itemId)
-        .then((item) => this.setState({
-          item,
-          loading: false,
-          image: getImageUrl(item),
-        }));
-    }
-  }
-
-  render() {
-    const { item, loading, image } = this.state;
-    const { children } = this.props;
-
-    const data = loading
-      ? <Spinner />
-      : (
-        <ItemView item={item} image={image}>
-          {children}
-        </ItemView>
-      );
-    const content = item ? data : <span className="title-no-person">Select a person from a list</span>;
-
-    return (
-      <div className="person-details card">
-        {content}
-      </div>
-    );
-  }
-}
+export default withDataDetails(ItemDetails, getPerson);
