@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import React, { Component } from 'react';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
 import Row from '../row';
 import ErrorBoundary from '../error-boundary';
 import SwapiService from '../../services/swapi-service';
@@ -11,16 +11,15 @@ export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
   state = {
-    selectedPerson: 1,
+    selectedItem: 1,
   }
 
   onItemSelected = (id) => {
-    this.setState({ selectedPerson: id });
+    this.setState({ selectedItem: id });
   }
 
-
   render() {
-    const { selectedPerson } = this.state;
+    const { selectedItem } = this.state;
 
     const itemList = (
       <ItemList
@@ -30,13 +29,13 @@ export default class PeoplePage extends Component {
       />
     );
 
-    const personDetails = (
-      <PersonDetails personId={selectedPerson} loading={false} />
+    const itemDetails = (
+      <ItemDetails itemId={selectedItem} loading={false} />
     );
 
     return (
       <ErrorBoundary>
-        <Row left={itemList} right={personDetails} />
+        <Row left={itemList} right={itemDetails} />
       </ErrorBoundary>
     );
   }
