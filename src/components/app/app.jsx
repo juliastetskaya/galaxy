@@ -5,7 +5,7 @@ import RandomPlanet from '../random-planet';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 // import PeoplePage from '../people-page';
-// import ItemList from '../item-list';
+import ItemList from '../item-list';
 import ItemDetails from '../item-details';
 import Row from '../row';
 import Record from '../record';
@@ -17,7 +17,7 @@ export default class App extends Component {
   state = {
     showRandomPlanet: true,
     hasError: false,
-    selectedPerson: null,
+    selectedPerson: 1,
   }
 
   componentDidCatch() {
@@ -36,6 +36,7 @@ export default class App extends Component {
     const { showRandomPlanet, hasError, selectedPerson } = this.state;
     const {
       getPerson,
+      getAllPeople,
       getStarship,
       getPersonImage,
       getStarshipImage,
@@ -48,7 +49,7 @@ export default class App extends Component {
     const personDetails = (
       <ItemDetails
         getData={getPerson}
-        itemId={11}
+        itemId={selectedPerson}
         getImageUrl={getPersonImage}
       >
         <Record label="Gender" field="gender" />
@@ -84,6 +85,11 @@ export default class App extends Component {
           <ErrorButton />
         </div>
         {/* <PeoplePage /> */}
+        <ItemList
+          onItemSelected={this.onItemSelected}
+          getData={getAllPeople}
+          renderLabel={({ name }) => name}
+        />
         <Row
           left={personDetails}
           right={starShipDetails}

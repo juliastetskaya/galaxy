@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import React, { Component } from 'react';
 import ItemList from '../item-list';
 import ItemDetails from '../item-details';
