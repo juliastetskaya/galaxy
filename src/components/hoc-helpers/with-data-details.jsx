@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
 
-const withDataDetails = (ViewDetails, getData, records, getImageUrl) => class extends Component {
+const withDataDetails = (ViewDetails, records) => class extends Component {
   state = {
     item: null,
     loading: true,
@@ -20,7 +20,7 @@ const withDataDetails = (ViewDetails, getData, records, getImageUrl) => class ex
   }
 
   updateItem() {
-    const { itemId } = this.props;
+    const { itemId, getData, getImageUrl } = this.props;
     this.setState({ loading: true });
 
     if (itemId) {

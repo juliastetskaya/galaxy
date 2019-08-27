@@ -7,6 +7,7 @@ import ErrorIndicator from '../error-indicator';
 // import PeoplePage from '../people-page';
 import Row from '../row';
 import SwapiService from '../../services/swapi-service';
+import { SwapiServiceProvider } from '../swapi-service-context';
 
 import {
   PersonList,
@@ -46,48 +47,50 @@ export default class App extends Component {
     }
 
     return (
-      <div className="container">
-        <Header />
-        {showRandomPlanet ? <RandomPlanet /> : null}
-        <div className="row mb2 button-row">
-          <button
-            type="button"
-            className="toggle-planet btn btn-warning btn-lg"
-            onClick={this.toggleRandomPlanet}
-          >
-            Toggle Random Planet
-          </button>
-          <ErrorButton />
+      <SwapiServiceProvider value={this.swapiService}>
+        <div className="container">
+          <Header />
+          {showRandomPlanet ? <RandomPlanet /> : null}
+          <div className="row mb2 button-row">
+            <button
+              type="button"
+              className="toggle-planet btn btn-warning btn-lg"
+              onClick={this.toggleRandomPlanet}
+            >
+              Toggle Random Planet
+            </button>
+            <ErrorButton />
+          </div>
+          {/* <PeoplePage /> */}
+
+          <Row
+            left={(
+              <PersonList
+                onItemSelected={this.onItemSelected}
+              />
+            )}
+            right={<PersonDetails itemId={selectedPerson} />}
+          />
+
+          <Row
+            left={(
+              <StarshipList
+                onItemSelected={this.onItemSelected}
+              />
+            )}
+            right={<StarshipDetails itemId={5} />}
+          />
+
+          <Row
+            left={(
+              <PlanetList
+                onItemSelected={this.onItemSelected}
+              />
+            )}
+            right={<PlanetDetails itemId={3} />}
+          />
         </div>
-        {/* <PeoplePage /> */}
-
-        <Row
-          left={(
-            <PersonList
-              onItemSelected={this.onItemSelected}
-            />
-          )}
-          right={<PersonDetails itemId={selectedPerson} />}
-        />
-
-        <Row
-          left={(
-            <StarshipList
-              onItemSelected={this.onItemSelected}
-            />
-          )}
-          right={<StarshipDetails itemId={5} />}
-        />
-
-        <Row
-          left={(
-            <PlanetList
-              onItemSelected={this.onItemSelected}
-            />
-          )}
-          right={<PlanetDetails itemId={3} />}
-        />
-      </div>
+      </SwapiServiceProvider>
     );
   }
 }
