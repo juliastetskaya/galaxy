@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
 import Spinner from '../spinner';
 
-const withDataDetails = (ViewDetails, getData) => class extends Component {
+const withDataDetails = (ViewDetails, getData, records, getImageUrl) => class extends Component {
   state = {
     item: null,
     loading: true,
@@ -21,7 +20,7 @@ const withDataDetails = (ViewDetails, getData) => class extends Component {
   }
 
   updateItem() {
-    const { itemId, getImageUrl } = this.props;
+    const { itemId } = this.props;
     this.setState({ loading: true });
 
     if (itemId) {
@@ -41,7 +40,11 @@ const withDataDetails = (ViewDetails, getData) => class extends Component {
       return <Spinner />;
     }
 
-    return <ViewDetails {...this.props} item={item} image={image} />;
+    return (
+      <ViewDetails {...this.props} item={item} image={image}>
+        {records}
+      </ViewDetails>
+    );
   }
 };
 

@@ -1,7 +1,5 @@
 import React from 'react';
 import ItemView from './item-view';
-import SwapiService from '../../services/swapi-service';
-import { withDataDetails } from '../hoc-helpers';
 
 const ItemDetails = ({ children, item, image }) => {
   const data = (
@@ -19,6 +17,4 @@ const ItemDetails = ({ children, item, image }) => {
   );
 };
 
-const { getPerson } = new SwapiService();
-
-export default withDataDetails(ItemDetails, getPerson);
+export default ItemDetails;
