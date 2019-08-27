@@ -7,7 +7,17 @@ const withData = (View) => class extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    this.update();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { getData } = this.props;
+    if (prevProps.getData !== getData) {
+      this.update();
+    }
+  }
+
+  update() {
     const { getData } = this.props;
     getData()
       .then((data) => this.setState({ data }));

@@ -7,6 +7,7 @@ import ErrorIndicator from '../error-indicator';
 // import PeoplePage from '../people-page';
 import Row from '../row';
 import SwapiService from '../../services/swapi-service';
+import DummySwapiService from '../../services/dummy-swapi-service';
 import { SwapiServiceProvider } from '../swapi-service-context';
 
 import {
@@ -19,12 +20,11 @@ import {
 } from '../sw-component';
 
 export default class App extends Component {
-  swapiService = new SwapiService();
-
   state = {
     showRandomPlanet: true,
     hasError: false,
     selectedPerson: 1,
+    swapiService: new DummySwapiService(),
   }
 
   componentDidCatch() {
@@ -39,17 +39,27 @@ export default class App extends Component {
     this.setState({ selectedPerson: id });
   }
 
+  onChangeService = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService
+        ? DummySwapiService : SwapiService;
+      return { swapiService: new Service() };
+    });
+  }
+
   render() {
-    const { showRandomPlanet, hasError, selectedPerson } = this.state;
+    const {
+      showRandomPlanet, hasError, selectedPerson, swapiService,
+    } = this.state;
 
     if (hasError) {
       return <ErrorIndicator />;
     }
 
     return (
-      <SwapiServiceProvider value={this.swapiService}>
+      <SwapiServiceProvider value={swapiService}>
         <div className="container">
-          <Header />
+          <Header changeService={this.onChangeService} />
           {showRandomPlanet ? <RandomPlanet /> : null}
           <div className="row mb2 button-row">
             <button

@@ -13,8 +13,10 @@ const withDataDetails = (ViewDetails, records) => class extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { itemId } = this.props;
-    if (prevProps.itemId !== itemId) {
+    const { itemId, getData, getImageUrl } = this.props;
+    if (prevProps.itemId !== itemId
+      || prevProps.getData !== getData
+      || prevProps.getImageUrl !== getImageUrl) {
       this.updateItem();
     }
   }
