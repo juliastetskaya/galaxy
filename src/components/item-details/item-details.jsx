@@ -8,11 +8,9 @@ const ItemDetails = ({ children, item, image }) => {
     </ItemView>
   );
 
-  const content = item ? data : <span className="title-no-person">Select a person from a list</span>;
-
   return (
     <div className="person-details card">
-      {content}
+      {data}
     </div>
   );
 };

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 
 const withDataDetails = (ViewDetails, records) => class extends Component {
   state = {
     item: null,
     loading: true,
+    error: false,
     image: null,
   }
 
@@ -23,7 +25,10 @@ const withDataDetails = (ViewDetails, records) => class extends Component {
 
   updateItem() {
     const { itemId, getData, getImageUrl } = this.props;
-    this.setState({ loading: true });
+    this.setState({
+      loading: true,
+      error: false,
+    });
 
     if (itemId) {
       getData(itemId)
@@ -31,15 +36,28 @@ const withDataDetails = (ViewDetails, records) => class extends Component {
           item,
           loading: false,
           image: getImageUrl(item),
+        }))
+        .catch(() => this.setState({
+          error: true,
         }));
     }
   }
 
   render() {
-    const { item, image, loading } = this.state;
+    const {
+      item, image, loading, error,
+    } = this.state;
+
+    if (!item) {
+      return <span className="title-no-item">Select a person from a list</span>;
+    }
 
     if (loading) {
       return <Spinner />;
+    }
+
+    if (error) {
+      return <ErrorIndicator />;
     }
 
     return (
