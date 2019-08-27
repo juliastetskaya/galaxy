@@ -37,18 +37,22 @@ const mapStarshipDetailsMethodsToProps = (swapiService) => ({
   getImageUrl: swapiService.getStarshipImage,
 });
 
-const PersonDetails = withSwapiService(
-  withDataDetails(ItemDetails, personRecords),
-  mapPersonDetailsMethodsToProps,
+const PersonDetails = withSwapiService(mapPersonDetailsMethodsToProps)(
+  withDataDetails(personRecords)(
+    ItemDetails,
+  ),
 );
 
-const PlanetDetails = withSwapiService(
-  withDataDetails(ItemDetails, planetRecords),
-  mapPlanetDetailsMethodsToProps,
+const PlanetDetails = withSwapiService(mapPlanetDetailsMethodsToProps)(
+  withDataDetails(planetRecords)(
+    ItemDetails,
+  ),
 );
-const StarshipDetails = withSwapiService(
-  withDataDetails(ItemDetails, starshipRecords),
-  mapStarshipDetailsMethodsToProps,
+
+const StarshipDetails = withSwapiService(mapStarshipDetailsMethodsToProps)(
+  withDataDetails(starshipRecords)(
+    ItemDetails,
+  ),
 );
 
 export {

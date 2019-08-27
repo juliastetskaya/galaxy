@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-const withDataDetails = (ViewDetails, records) => class extends Component {
+const withDataDetails = (records) => (ViewDetails) => class extends Component {
   state = {
     item: null,
     loading: true,
