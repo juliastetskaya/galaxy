@@ -1,6 +1,7 @@
 import React from 'react';
 
-const ItemList = ({ onItemSelected, renderLabel, data }) => {
+const ItemList = (props) => {
+  const { onItemSelected, data, children: renderLabel } = props;
   const items = data.map((item) => {
     const label = renderLabel(item);
     const { id } = item;

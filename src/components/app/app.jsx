@@ -45,20 +45,6 @@ export default class App extends Component {
       return <ErrorIndicator />;
     }
 
-    const personDetails = (
-      <PersonDetails
-        itemId={selectedPerson}
-      />
-    );
-
-    const starshipDetails = (
-      <StarshipDetails itemId={5} />
-    );
-
-    const planetDetails = (
-      <PlanetDetails itemId={3} />
-    );
-
     return (
       <div className="container">
         <Header />
@@ -79,30 +65,27 @@ export default class App extends Component {
           left={(
             <PersonList
               onItemSelected={this.onItemSelected}
-              renderLabel={({ name }) => name}
             />
           )}
-          right={personDetails}
+          right={<PersonDetails itemId={selectedPerson} />}
         />
 
         <Row
           left={(
             <StarshipList
               onItemSelected={this.onItemSelected}
-              renderLabel={({ name }) => name}
             />
           )}
-          right={starshipDetails}
+          right={<StarshipDetails itemId={5} />}
         />
 
         <Row
           left={(
             <PlanetList
               onItemSelected={this.onItemSelected}
-              renderLabel={({ name }) => name}
             />
           )}
-          right={planetDetails}
+          right={<PlanetDetails itemId={3} />}
         />
       </div>
     );
