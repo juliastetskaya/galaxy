@@ -5,6 +5,10 @@ import ErrorIndicator from '../error-indicator';
 import PlanetView from './planet-view';
 
 export default class RandomPlanet extends Component {
+  static defaultProps = {
+    updateInterval: 10000,
+  }
+
   swapiService = new SwapiService();
 
   state = {
@@ -14,7 +18,8 @@ export default class RandomPlanet extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.updatePlanet, 5000);
+    const { updateInterval } = this.props;
+    this.interval = setInterval(this.updatePlanet, updateInterval);
   }
 
   componentWillUnmount() {
