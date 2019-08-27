@@ -2,7 +2,7 @@ import React from 'react';
 
 import ItemDetails from '../item-details';
 import Record from '../record';
-import { withDataDetails, withSwapiService } from '../hoc-helpers';
+import { withDataDetails, withSwapiService, compose } from '../hoc-helpers';
 
 const personRecords = [
   <Record label="Gender" field="gender" key="gender" />,
@@ -37,23 +37,20 @@ const mapStarshipDetailsMethodsToProps = (swapiService) => ({
   getImageUrl: swapiService.getStarshipImage,
 });
 
-const PersonDetails = withSwapiService(mapPersonDetailsMethodsToProps)(
-  withDataDetails(personRecords)(
-    ItemDetails,
-  ),
-);
+const PersonDetails = compose(
+  withSwapiService(mapPersonDetailsMethodsToProps),
+  withDataDetails(personRecords),
+)(ItemDetails);
 
-const PlanetDetails = withSwapiService(mapPlanetDetailsMethodsToProps)(
-  withDataDetails(planetRecords)(
-    ItemDetails,
-  ),
-);
+const PlanetDetails = compose(
+  withSwapiService(mapPlanetDetailsMethodsToProps),
+  withDataDetails(planetRecords),
+)(ItemDetails);
 
-const StarshipDetails = withSwapiService(mapStarshipDetailsMethodsToProps)(
-  withDataDetails(starshipRecords)(
-    ItemDetails,
-  ),
-);
+const StarshipDetails = compose(
+  withSwapiService(mapStarshipDetailsMethodsToProps),
+  withDataDetails(starshipRecords),
+)(ItemDetails);
 
 export {
   PersonDetails,
