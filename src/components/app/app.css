@@ -2,6 +2,9 @@
   width: 70%;
   margin: 0 auto;
   min-width: 420px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .toggle-planet {
@@ -18,4 +21,8 @@
 
 .stardb-app .row {
   margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0 auto;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
@@ -12,6 +13,11 @@ import {
   PlanetPage,
   StarshipPage,
 } from '../pages';
+
+import {
+  PlanetDetails,
+  StarshipDetails,
+} from '../sw-component';
 
 export default class App extends Component {
   state = {
@@ -42,15 +48,37 @@ export default class App extends Component {
 
     return (
       <SwapiServiceProvider value={swapiService}>
-        <div className="container">
-          <Header changeService={this.onChangeService} />
-          <RandomPlanet />
+        <Router>
+          <div className="container">
+            <Header changeService={this.onChangeService} />
+            <RandomPlanet />
 
-          <PeoplePage />
-          <PlanetPage />
-          <StarshipPage />
+            <Route
+              path="/"
+              render={() => <h2 className="title">Welcome to StarDB!</h2>}
+              exact
+            />
+            <Route path="/people/:id?" component={PeoplePage} exact />
+            <Route path="/planets" component={PlanetPage} exact />
+            <Route
+              path="/planets/:id"
+              render={({ match }) => {
+                const { id } = match.params;
+                return <PlanetDetails itemId={id} />;
+              }}
+            />
+            <Route path="/starships" component={StarshipPage} exact />
+            <Route
+              path="/starships/:id"
+              render={({ match }) => {
+                const { id } = match.params;
+                return <StarshipDetails itemId={id} />;
+              }}
+            />
 
-        </div>
+          </div>
+        </Router>
+
       </SwapiServiceProvider>
     );
   }
