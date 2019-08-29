@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
@@ -53,29 +53,31 @@ export default class App extends Component {
             <Header changeService={this.onChangeService} />
             <RandomPlanet />
 
-            <Route
-              path="/"
-              render={() => <h2 className="title">Welcome to StarDB!</h2>}
-              exact
-            />
-            <Route path="/people/:id?" component={PeoplePage} exact />
-            <Route path="/planets" component={PlanetPage} exact />
-            <Route
-              path="/planets/:id"
-              render={({ match }) => {
-                const { id } = match.params;
-                return <PlanetDetails itemId={id} />;
-              }}
-            />
-            <Route path="/starships" component={StarshipPage} exact />
-            <Route
-              path="/starships/:id"
-              render={({ match }) => {
-                const { id } = match.params;
-                return <StarshipDetails itemId={id} />;
-              }}
-            />
-
+            <Switch>
+              <Route
+                path="/"
+                render={() => <h2 className="title">Welcome to StarDB!</h2>}
+                exact
+              />
+              <Route path="/people/:id?" component={PeoplePage} exact />
+              <Route path="/planets" component={PlanetPage} exact />
+              <Route
+                path="/planets/:id"
+                render={({ match }) => {
+                  const { id } = match.params;
+                  return <PlanetDetails itemId={id} />;
+                }}
+              />
+              <Route path="/starships" component={StarshipPage} exact />
+              <Route
+                path="/starships/:id"
+                render={({ match }) => {
+                  const { id } = match.params;
+                  return <StarshipDetails itemId={id} />;
+                }}
+              />
+              <Route render={() => <h2 className="title">Page not found</h2>} />
+            </Switch>
           </div>
         </Router>
 
