@@ -6,17 +6,17 @@ const Header = (props) => {
   return (
     <div className="header d-flex">
       <h3>
-        <Link to="/galaxy/">StarDB</Link>
+        <Link to="/">StarDB</Link>
       </h3>
       <ul className="d-flex">
         <li>
-          <Link to="/galaxy/people/">People</Link>
+          <Link to="/people/">People</Link>
         </li>
         <li>
-          <Link to="/galaxy/planets/">Planets</Link>
+          <Link to="/planets/">Planets</Link>
         </li>
         <li>
-          <Link to="/galaxy/starships/">Starships</Link>
+          <Link to="/starships/">Starships</Link>
         </li>
       </ul>
       <button
