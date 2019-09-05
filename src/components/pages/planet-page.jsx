@@ -1,11 +1,21 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { PlanetList } from '../sw-component';
+import { PlanetList, PlanetDetails } from '../sw-component';
+import Row from '../row';
 
-const PlanetPage = ({ history }) => (
-  <PlanetList
-    onItemSelected={(id) => history.push(id)}
-  />
-);
+const PlanetPage = ({ history, match }) => {
+  const { id } = match.params;
+
+  return (
+    <Row
+      left={(
+        <PlanetList
+          onItemSelected={(itemId) => history.push(itemId)}
+        />
+      )}
+      right={<PlanetDetails itemId={id} />}
+    />
+  );
+};
 
 export default withRouter(PlanetPage);

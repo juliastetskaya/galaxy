@@ -1,5 +1,4 @@
 import React from 'react';
-import ErrorButton from '../error-button';
 
 const ItemView = ({ item, image, children }) => {
   const { name } = item;
@@ -16,7 +15,6 @@ const ItemView = ({ item, image, children }) => {
         <ul className="list-group list-group-flush">
           {React.Children.map(children, (child) => React.cloneElement(child, { item }))}
         </ul>
-        <ErrorButton />
       </div>
     </>
   );

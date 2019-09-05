@@ -14,11 +14,6 @@ import {
   StarshipPage,
 } from '../pages';
 
-import {
-  PlanetDetails,
-  StarshipDetails,
-} from '../sw-component';
-
 export default class App extends Component {
   state = {
     hasError: false,
@@ -60,22 +55,9 @@ export default class App extends Component {
                 exact
               />
               <Route path="/people/:id?" component={PeoplePage} exact />
-              <Route path="/planets" component={PlanetPage} exact />
-              <Route
-                path="/planets/:id"
-                render={({ match }) => {
-                  const { id } = match.params;
-                  return <PlanetDetails itemId={id} />;
-                }}
-              />
-              <Route path="/starships" component={StarshipPage} exact />
-              <Route
-                path="/starships/:id"
-                render={({ match }) => {
-                  const { id } = match.params;
-                  return <StarshipDetails itemId={id} />;
-                }}
-              />
+              <Route path="/planets/:id?" component={PlanetPage} exact />
+              <Route path="/starships/:id?" component={StarshipPage} exact />
+
               <Route render={() => <h2 className="title">Page not found</h2>} />
             </Switch>
           </div>
