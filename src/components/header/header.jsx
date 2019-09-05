@@ -19,13 +19,6 @@ const Header = (props) => {
           <Link to="/starships/">Starships</Link>
         </li>
       </ul>
-      <button
-        type="button"
-        className="btn btn-primary btn-sm"
-        onClick={changeService}
-      >
-        Change Service
-      </button>
     </div>
   );
 };
